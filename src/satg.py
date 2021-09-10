@@ -406,5 +406,4 @@ if __name__ == '__main__':
     shutil.copytree(os.path.join(dirname, 'fonts'), os.path.join(dirname, 'build/fonts'))
     shutil.copytree(os.path.join(dirname, 'img'), os.path.join('build/img'))
     shutil.copyfile(os.path.join(dirname, 'robots.txt'), os.path.join(dirname, 'build/robots.txt'))
-    shutil.copyfile(os.path.join(dirname, 'preston.gpg'), os.path.join(dirname, 'build/preston.gpg'))
 
