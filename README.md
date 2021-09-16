@@ -14,6 +14,3 @@ the fonts will not display until after you actually deploy the
 website, due to me refering to the fonts via global path in my
 css file, which is really an html file in templates by the name of
 of `style.html`.
-
-Link to the website is https://prestonpan.tech. 
-Onion link is: http://4ugiqvhd7mrofdcubx5in4srqpmpsskwx4dpjps4waou5aksvoyk6vad.onion/.

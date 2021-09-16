@@ -74,8 +74,7 @@ class SATG:
             f_dir = os.path.join(self.templates_dir, f)
             with open(f_dir, "r") as fi:
                 f_contents = fi.read()
-            minifier = Minifier(f_contents)
-            templates[f] = minifier.minify_all()
+            templates[f] = f_contents 
         return templates
 
     # 
@@ -173,7 +172,7 @@ def generate_dataset_project(current_path, projects_path):
         project['path'] = os.path.join(current_path, f'content/projects/{dirname}/{dirname}.html') 
         project['link'] = f"content/projects/{dirname}/{dirname}.html"
         project['picture'] = f"content/projects/{dirname}/{dirname}.webp"
-        project['git'] = f'git://github.com/SWCTechClub{dirname}.git'
+        project['git'] = f'git://github.com/SWCTechClub/{dirname}.git'
         date = datetime.fromtimestamp(os.path.getctime(project['path'])).strftime('%d-%m-%Y')
         project['date'] = date
         with open(os.path.join(current_path, f'content/projects/{dirname}/description.txt'), 'r') as f:

@@ -8,7 +8,7 @@ elif [ "$1" = "clean" ]; then
     rm -rf build/
 elif [ "$1" = "view" ]; then
     python3 satg.py
-    abrowser build/index.html
+    python3 -m http.server
 else
     python3 satg.py
     rsync -vrP --delete-after ./build/ root@prestonpan.tech:/var/www/prestonpan
