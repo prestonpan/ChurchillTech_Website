@@ -221,9 +221,21 @@ if __name__ == '__main__':
     dirname = os.path.dirname(__file__)
     
     # deleting and recreating the build directory
-    if os.path.exists(os.path.join(dirname, 'build')):
-        shutil.rmtree(os.path.join(dirname, 'build'))
-    os.mkdir(os.path.join(dirname, 'build'))
+    if not os.path.exists(os.path.join(dirname, 'build')):
+        os.mkdir(os.path.join(dirname, 'build'))
+
+    build_folder_path = os.path.join(dirname, "build")
+    for file_object in os.listdir(build_folder_path):
+        file_object_path = os.path.join(build_folder_path, file_object) 
+        if os.path.isfile(file_object_path) or os.path.islink(file_object_path):
+            if file_object == 'README.md' or file_object == '.gitignore':
+                continue
+            os.unlink(file_object_path)
+        else:
+            if file_object == '.git':
+                continue
+            shutil.rmtree(file_object_path)
+
     os.mkdir(os.path.join(dirname, 'build/content'))
     os.mkdir(os.path.join(dirname, 'build/content/projects'))
     os.mkdir(os.path.join(dirname, 'build/content/blog'))
@@ -346,14 +358,22 @@ if __name__ == '__main__':
         f.write(projects_gen.template_files['404.html'])
     
     # index page
-    index_projects = project_templates[2][0][1] + project_templates[2][1][1] + project_templates[2][2][1]
+    index_projects = ''
+    for i in range(len(project_templates[2])):
+        if i > 2:
+            break
+        index_projects += project_templates[2][i][1]
     index_template = projects_gen.replace_single_tag(
             projects_gen.template_files['index.html'], 
             "{%PROJECTS%}",
             index_projects,
             False
     )
-    index_blogs = blog_templates[2][0][1] + blog_templates[2][1][1] + blog_templates[2][2][1]
+    index_blogs = ''
+    for i in range(len(blog_templates[2])):
+        if i > 2:
+            break
+        index_blogs += blog_templates[2][i][1]
     index_template = blogs_gen.replace_single_tag(
             index_template,
             "{%BLOGS%}",
